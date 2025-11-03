@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import UserCard from "../components/UserCard";
+import { Pencil, Trash2 } from "lucide-react";
+import {Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import UserForm from "../components/UserForm";
 import { fetchUsers } from "../services/api";
 import type { User } from "../types/user";
@@ -47,24 +48,55 @@ export default function UserListPage() {
     }
   };
 
-  if (loading) return <p className="text-gray-600">Loading users...</p>;
-  if (error) return <p className="text-red-500">{error}</p>;
+  if (loading) return <p className= "text-gray-500">Loading users...</p>;
+  if (error) return <p className="text-red-700">{error}</p>;
 
   return (
-  <div className="p-8">
-    <h1 className="text-2xl font-bold mb-6 text-gray-800">User Management</h1>
+    <div className="flex flex-col gap-1 rounded-xl p-1 inset-ring inset-ring-gray-950/5 m-30">
+      <h1 className="text-2xl font-bold mb-6 text-gray-500">User Management</h1>
+      
+      <UserForm onUserCreated={handleFetchUsers} />
 
-    <UserForm onUserCreated={handleFetchUsers} />
-
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {users.map((user) => (
-        <UserCard 
-          key={user.id}
-          user={user} 
-          onEdit={handleEdit} 
-          onDelete={handleDelete} />
-      ))}
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="text-gray-500 w-[100px]">ID</TableHead>
+            <TableHead className="text-gray-500 w-60 text-left">Name</TableHead>
+            <TableHead className="text-gray-500 w-60 text-left">Surname</TableHead>
+            <TableHead className="text-gray-500  text-left">Email</TableHead>
+            <TableHead className="text-gray-500 text-right ">Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {users.map((user) => (
+            <TableRow key={user.id}>
+              <TableCell className="text-left font-medium">{user.id}</TableCell>
+              <TableCell className="w-60 text-left">{user.name}</TableCell>
+              <TableCell className="w-60 text-left">{user.surname}</TableCell>
+              <TableCell className="text-left">{user.email}</TableCell>
+              <TableCell className="flex text-right justify-end">
+                <button
+                  title="Edit"
+                  onClick={() => handleEdit}
+                  className="flex items-center m-1 gap-1 px-3 py-1 text-sm font-medium text-blue-600 border border-blue-300 rounded-xl hover:bg-blue-50 transition">
+                  <Pencil size={16} />
+                </button>
+                <button
+                  onClick={() => handleDelete(user.id)}
+                  className="flex items-center m-1 gap-1 px-3 py-1 text-sm font-medium text-red-600 border border-red-300 rounded-xl hover:bg-red-50 transition">
+                  <Trash2 size={16} />
+                </button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TableCell className="text-gray-500 text-left" colSpan={4}>Total of users</TableCell>
+            <TableCell className="text-gray-500 text-right">{users.length}</TableCell>
+          </TableRow>
+        </TableFooter>
+      </Table>
     </div>
-  </div>
-);
+  )
 };
