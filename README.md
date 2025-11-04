@@ -45,7 +45,7 @@ It was started very recently and is a work in progress. A [What's next](#what's-
 
 ## What's next
 
-* Move the backend URL into .env
+* Move the backend URL into a .env file
 * Clean the code and structure
 * Clean the styling part
 * Add Test side and code quality
@@ -90,7 +90,7 @@ pnpm run dev
 ```
 
 
-4. The backend will be available at `http://localhost:5173`
+4. The frontend will be available at `http://localhost:5173`
 
 ---
 
