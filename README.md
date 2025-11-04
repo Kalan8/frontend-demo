@@ -28,7 +28,6 @@ It was started very recently and is a work in progress. A [What's next](#whats-n
 | \*\*TypeScript\*\* | Strongly typed JavaScript for safer and cleaner code |
 | \*\*Vite\*\*       | Fast build tool and dev server |
 | \*\*TailwindCSS\*\*| Utility-first CSS framework for responsive design |
-| \*\*Axios / Fetch\*\* | For API communication with the backend |
 | \*\*pnpm\*\*       | Efficient package manager used for this project |
 
 ---
