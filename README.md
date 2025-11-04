@@ -22,13 +22,13 @@ It was started very recently and is a work in progress. A [What's next](#whats-n
 
 ## Tech Stack
 
-| Technology     | Description |
-|----------------|-------------|
-| \*\*React\*\*      | UI library for building user interfaces |
-| \*\*TypeScript\*\* | Strongly typed JavaScript for safer and cleaner code |
-| \*\*Vite\*\*       | Fast build tool and dev server |
-| \*\*TailwindCSS\*\*| Utility-first CSS framework for responsive design |
-| \*\*pnpm\*\*       | Efficient package manager used for this project |
+| Technology      | Description |
+|-----------------|-------------|
+| **React**       | UI library for building user interfaces |
+| **TypeScript**  | Strongly typed JavaScript for safer and cleaner code |
+| **Vite**        | Fast build tool and dev server |
+| **TailwindCSS** | Utility-first CSS framework for responsive design |
+| **pnpm**        | Efficient package manager used for this project |
 
 ---
 
@@ -99,9 +99,8 @@ This frontend communicates with a Spring Boot backend via REST API endpoints:
 
 | Method | Endpoint | Description |
 |--------|-----------|-------------|
-| \*\*GET\*\* | `/api/users` | Retrieve all users |
-| \*\*POST\*\* | `/api/users` | Create a new user |
-| \*\*PUT\*\* | `/api/users/{id}` | Update a user |
-| \*\*DELETE\*\* | `/api/users/{id}` | Delete a user |
+| **GET** | `/api/users` | Retrieve all users |
+| **POST** | `/api/users` | Create a new user |
+| **PUT** | `/api/users/{id}` | Update a user |
+| **DELETE** | `/api/users/{id}` | Delete a user |
 
----
