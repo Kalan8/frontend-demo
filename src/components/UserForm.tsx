@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createUser } from "../services/api";
+import { createUser } from "../api/apiUser";
 
 type Props = {
   onUserCreated: () => void;

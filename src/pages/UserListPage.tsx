@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Pencil, Trash2 } from "lucide-react";
 import {Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import UserForm from "../components/UserForm";
-import { fetchUsers } from "../services/api";
+import { fetchUsers } from "../api/apiUser";
 import type { User } from "../types/user";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
