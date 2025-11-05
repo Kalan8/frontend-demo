@@ -44,7 +44,6 @@ It was started very recently and is a work in progress. A [What's next](#whats-n
 
 ## What's next
 
-* Move the backend URL into a .env file
 * Clean the code and structure
 * Clean the styling part
 * Add Test side and code quality
@@ -89,7 +88,10 @@ pnpm run dev
 ```
 
 
-4. The frontend will be available at `http://localhost:5173`
+4. The frontend will be available by default at `http://localhost:3000`
+   But you can set another exposure port in the .env file via the `VITE_PORT` property.
+   In this case, make sure to configure the new frontend url in the backend `application.properties` to let both communicate.
+
 
 ---
 
