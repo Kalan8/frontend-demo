@@ -60,7 +60,7 @@ export default function UserForm({ onUserCreated }: Readonly<Props>) {
         />
         <input
           type="email"
-          maxLength={30}
+          maxLength={50}
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
