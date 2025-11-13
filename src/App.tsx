@@ -1,5 +1,5 @@
 import { ThemeToggle } from "./components/ThemeToggle";
-import UserListPage from "./pages/UserListPage";
+import PlayerListPage from "./pages/PlayerListPage";
 
 function App() {
   return (
@@ -7,7 +7,7 @@ function App() {
       <div className="fixed bottom-4 right-4 z-50">
         <ThemeToggle />
       </div>
-      <UserListPage />
+      <PlayerListPage />
     </main>
   );
 }

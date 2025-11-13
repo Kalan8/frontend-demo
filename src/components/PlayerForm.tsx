@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { createUser } from "../api/apiUser";
+import { createPlayer } from "../api/apiPlayer";
 
 type Props = {
-  onUserCreated: () => void;
+  onPlayerCreated: () => void;
 };
 
-const UserForm = ({ onUserCreated }: Readonly<Props>) => {
+const PlayerForm = ({ onPlayerCreated }: Readonly<Props>) => {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
@@ -17,11 +17,11 @@ const UserForm = ({ onUserCreated }: Readonly<Props>) => {
     setError(null);
     setLoading(true);
     try {
-      await createUser({ name, surname, email });
+      await createPlayer({ name, surname, email });
       setName("");
       setSurname("");
       setEmail("");
-      onUserCreated();
+      onPlayerCreated();
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -34,7 +34,7 @@ const UserForm = ({ onUserCreated }: Readonly<Props>) => {
       onSubmit={handleSubmit}
       className="m-5 p-6 rounded-2xl shadow border border-gray-200 mb-6"
     >
-      <h2 className="text-xl font-semibold mb-4">Create New User</h2>
+      <h2 className="text-xl font-semibold mb-4">Create New Player</h2>
 
       {error && <p className="text-red-500 mb-2">{error}</p>}
 
@@ -78,4 +78,4 @@ const UserForm = ({ onUserCreated }: Readonly<Props>) => {
   );
 }
 
-export default UserForm;
+export default PlayerForm;

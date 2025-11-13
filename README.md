@@ -7,7 +7,7 @@ The associated backend is developed in Java and it is available at :
 The purpose of this couple of projects is to develop a lottery application. \
 A brief specification of the app is:
 
-* provide a page for creating/importing users and display the list of registered users,
+* provide a page for creating/importing players and display the list of registered players,
 * provide another page for launching the lottery and displaying the winner(s).
 
 The [Further Potential Features](#further-potential-features) section below presents what would
@@ -39,9 +39,9 @@ This project is mainly a sandbox for testing backend/frontend techs and concepts
 ## Actual Features
 
 So far so good ! \
-For now, there is a page which fetches the data from the backend and then display a user form for registering
-users. The page displays dynamically the users already registered. Two buttons are present in each row of user to let
-deleting the user or updating the info of the user (frontend modal not yet implemented but backend is ready).
+For now, there is a page which fetches the data from the backend and then display a player form for registering
+players. The page displays dynamically the players already registered. Two buttons are present in each row of player to let
+deleting the player or updating the info of the player (frontend modal not yet implemented but backend is ready).
 
 ---
 
@@ -51,7 +51,7 @@ The actual specification is simple but it could be nice then to improve the app 
 user-friendly.
 It could be good to have a simple page for people who want to register for the lottery.
 An authentication system to allow an admin or administration staff to reach administration page.
-On this page, the user can administrate the list of users so create/update/delete or import a file of users.
+On this page, the user can administrate the list of players so create/update/delete or import a file of players.
 And on this page, the user can set the lottery: the number of winners and ordered/unordered winners.
 The application could send mail to the registered people to indicate if they have won or lost.
 
@@ -62,7 +62,7 @@ The application could send mail to the registered people to indicate if they hav
 * **[Back]** Create an empty project and decide/install all the tools and frameworks
   needed
 * **[Back]** Configure tools and frameworks basically to make the app running
-* **[Back]** Structure my project and create my user entity, repository, service and
+* **[Back]** Structure my project and create my player entity, repository, service and
   REST controller
 * **[Back]** Install My SQL and connect it to the app
 * **[Front]** Decide the stack (React + TypeScript + Vite + TailwindCss) and install
@@ -99,7 +99,7 @@ The application could send mail to the registered people to indicate if they hav
 
 * **[Back]** Create json file with data to import in Postman and add it to the repo
 * **[Back]** Add a logger to track application behavior, and debug/diagnose issues
-* **[Back] / [Front]** Add a random user feature
+* **[Back] / [Front]** Add a random player feature
 
 ---
 
@@ -119,10 +119,10 @@ The application could send mail to the registered people to indicate if they hav
 
 ## Frontend Internal Features
 
-* **Create Users** — Use the user form to add a new user (with name, surname, and email).
-* **View All Users** — The users list automatically updates after each operation.
-* **Edit Existing Users** — Update a user’s details directly via the UI (modal not implemented yet)
-* **Delete Users** — Remove users from the list with a single click.
+* **Create Players** — Use the player form to add a new player (with name, surname, and email).
+* **View All Players** — The players list automatically updates after each operation.
+* **Edit Existing Players** — Update a player’s details directly via the UI (modal not implemented yet)
+* **Delete Players** — Remove players from the list with a single click.
 * **Live Refresh** — The list reloads automatically after each create, update, or delete operation.
 
 
@@ -170,10 +170,10 @@ This frontend communicates with the backend via REST API endpoints:
 
 | HTTP Method | Endpoint          | Description                    | Request Body (JSON) Example                                                       | Response Status  | Possible Errors                                                                                              |
 |-------------|-------------------|--------------------------------|-----------------------------------------------------------------------------------|------------------|--------------------------------------------------------------------------------------------------------------|
-| **GET**     | `/api/users`      | Retrieve all users             | –                                                                                 | `200 OK`         | `500 Internal Server Error`                                                                                  |
-| **GET**     | `/api/users/{id}` | Retrieve a specific user by ID | –                                                                                 | `200 OK`         | `404 Not Found` if user doesn’t exist                                                                        |
-| **POST**    | `/api/users`      | Create a new user              | ```json { "name": "John", "surname": "Doe", "email": "john.doe@example.com" } ``` | `201 Created`    | `400 Bad Request` (validation error) / `409 Conlict` (DB integrity violation)                                |
-| **PUT**     | `/api/users/{id}` | Update an existing user by ID  | ```json { "name": "Jane", "surname": "Doe", "email": "jane.doe@example.com" } ``` | `200 OK`         | `404 Not Found` (user not found) / `400 Bad Request` (invalid data) / `409 Conlict` (DB integrity violation) |
-| **DELETE**  | `/api/users/{id}` | Delete a user by ID            | –                                                                                 | `204 No Content` | `404 Not Found` if user doesn’t exist                                                                        |
+| **GET**     | `/api/player`      | Retrieve all players             | –                                                                                 | `200 OK`         | `500 Internal Server Error`                                                                                  |
+| **GET**     | `/api/player/{id}` | Retrieve a specific player by ID | –                                                                                 | `200 OK`         | `404 Not Found` if player doesn’t exist                                                                        |
+| **POST**    | `/api/playes`      | Create a new player              | ```json { "name": "John", "surname": "Doe", "email": "john.doe@example.com" } ``` | `201 Created`    | `400 Bad Request` (validation error) / `409 Conlict` (DB integrity violation)                                |
+| **PUT**     | `/api/player/{id}` | Update an existing player by ID  | ```json { "name": "Jane", "surname": "Doe", "email": "jane.doe@example.com" } ``` | `200 OK`         | `404 Not Found` (player not found) / `400 Bad Request` (invalid data) / `409 Conlict` (DB integrity violation) |
+| **DELETE**  | `/api/player/{id}` | Delete a player by ID            | –                                                                                 | `204 No Content` | `404 Not Found` if player doesn’t exist                                                                        |
 
 

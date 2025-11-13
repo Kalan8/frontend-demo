@@ -1,62 +1,62 @@
 import { useEffect, useState } from "react";
 import { Pencil, Trash2 } from "lucide-react";
 import {Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import UserForm from "../components/UserForm";
-import { fetchUsers } from "../api/apiUser";
-import type { User } from "../types/user";
+import PlayerForm from "../components/PlayerForm";
+import { fetchPlayers, PLAYER_API } from "../api/apiPlayer";
+import type { Player } from "../types/player";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-const UserListPage= () => {
-const [users, setUsers] = useState<User[]>([]);
+const PlayerListPage= () => {
+const [players, setPlayers] = useState<Player[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-    const handleFetchUsers = () => {
-    fetchUsers()
+    const handleFetchPlayers = () => {
+    fetchPlayers()
     .then((data) => {
-      setUsers(data)
+      setPlayers(data)
     })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }
 
   useEffect(() => {
-    handleFetchUsers();
+    handleFetchPlayers();
   }, []);
 
-  const handleEdit = (user: User) => {
-    console.log("Edit user:", user);
+  const handleEdit = (player: Player) => {
+    console.log("Edit player:", player);
     // TODO: open a modal or something like that
   };
 
 
     const handleDelete = async (id: number) => {
-    if (!confirm("Are you sure you want to delete this user?")) return;
+    if (!confirm("Are you sure you want to delete this player?")) return;
 
     try {
-      const res = await fetch(API_BASE_URL + `/api/users/${id}`, {
+      const res = await fetch(API_BASE_URL + PLAYER_API +`/${id}`, {
         method: "DELETE",
       });
 
       if (res.ok) {
-        setUsers(users.filter((user) => user.id !== id));
+        setPlayers(players.filter((player) => player.id !== id));
       } else {
-        console.error("Failed to delete user");
+        console.error("Failed to delete player");
       }
     } catch (error) {
-      console.error("Error deleting user:", error);
+      console.error("Error deleting player:", error);
     }
   };
 
-  if (loading) return <p>Loading users...</p>;
+  if (loading) return <p>Loading players...</p>;
   if (error) return <p className="text-red-700">{error}</p>;
 
   return (
     <div className="flex flex-col gap-1 rounded-xl p-1 inset-ring inset-ring-gray-950/5 dark:inset-ring dark:inset-ring-gray-50/5 m-30">
-      <h1 className="text-2xl font-bold mb-6">User Management</h1>
+      <h1 className="text-2xl font-bold mb-6">Player Management</h1>
       
-      <UserForm onUserCreated={handleFetchUsers} />
+      <PlayerForm onPlayerCreated={handleFetchPlayers} />
 
       <Table>
         <TableHeader>
@@ -69,12 +69,12 @@ const [users, setUsers] = useState<User[]>([]);
           </TableRow>
         </TableHeader>
         <TableBody>
-          {users.map((user) => (
-            <TableRow key={user.id}>
-              <TableCell className="text-left font-medium">{user.id}</TableCell>
-              <TableCell className="w-60 text-left">{user.name}</TableCell>
-              <TableCell className="w-60 text-left">{user.surname}</TableCell>
-              <TableCell className="text-left">{user.email}</TableCell>
+          {players.map((player) => (
+            <TableRow key={player.id}>
+              <TableCell className="text-left font-medium">{player.id}</TableCell>
+              <TableCell className="w-60 text-left">{player.name}</TableCell>
+              <TableCell className="w-60 text-left">{player.surname}</TableCell>
+              <TableCell className="text-left">{player.email}</TableCell>
               <TableCell className="flex text-right justify-end">
                 <button
                   title="Edit"
@@ -84,7 +84,7 @@ const [users, setUsers] = useState<User[]>([]);
                 </button>
                 <button
                   title="Delete"
-                  onClick={() => handleDelete(user.id)}
+                  onClick={() => handleDelete(player.id)}
                   className="flex items-center m-1 gap-1 px-3 py-1 text-sm font-medium text-red-600 border rounded-xl transition">
                   <Trash2 size={16} />
                 </button>
@@ -94,8 +94,8 @@ const [users, setUsers] = useState<User[]>([]);
         </TableBody>
         <TableFooter>
           <TableRow>
-            <TableCell className="text-left" colSpan={4}>Total of users</TableCell>
-            <TableCell className="text-right">{users.length}</TableCell>
+            <TableCell className="text-left" colSpan={4}>Total of players</TableCell>
+            <TableCell className="text-right">{players.length}</TableCell>
           </TableRow>
         </TableFooter>
       </Table>
@@ -103,4 +103,4 @@ const [users, setUsers] = useState<User[]>([]);
   )
 };
 
-export default UserListPage;
+export default PlayerListPage;
