@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { createPlayer } from "../api/apiPlayer";
 
 type Props = {
+  titleForm : string;
   onPlayerCreated: () => void;
 };
 
-const PlayerForm = ({ onPlayerCreated }: Readonly<Props>) => {
+const PlayerForm = ({ onPlayerCreated, titleForm }: Readonly<Props>) => {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
@@ -34,9 +35,9 @@ const PlayerForm = ({ onPlayerCreated }: Readonly<Props>) => {
       onSubmit={handleSubmit}
       className="m-5 p-6 rounded-2xl shadow border border-gray-200 mb-6"
     >
-      <h2 className="text-xl font-semibold mb-4">Create New Player</h2>
+      <h2 className="text-xl font-semibold mb-4">{titleForm}</h2>
 
-      {error && <p className="text-red-500 mb-2">{error}</p>}
+      <p className="text-red-500 mb-2">{error}<br></br></p>
 
         <input
           type="text"
@@ -70,12 +71,12 @@ const PlayerForm = ({ onPlayerCreated }: Readonly<Props>) => {
         <button
           type="submit"
           disabled={loading}
-          className="bg-gray-200 dark:bg-gray-800 hover:bg-muted/50 rounded-lg py-2 px-4 disabled:opacity-50 m-1"
+          className="bg-gray-200 dark:bg-gray-800 hover:bg-muted/50 rounded-lg w-24 py-2 px-4 disabled:opacity-50 m-1"
         >
           {loading ? "Creating..." : "Create"}
         </button>
     </form>
-  );
+  )
 }
 
 export default PlayerForm;

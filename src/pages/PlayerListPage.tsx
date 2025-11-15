@@ -12,7 +12,7 @@ const [players, setPlayers] = useState<Player[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-    const handleFetchPlayers = () => {
+const handleFetchPlayers = () => {
     fetchPlayers()
     .then((data) => {
       setPlayers(data)
@@ -56,7 +56,7 @@ const [players, setPlayers] = useState<Player[]>([]);
     <div className="flex flex-col gap-1 rounded-xl p-1 inset-ring inset-ring-gray-950/5 dark:inset-ring dark:inset-ring-gray-50/5 m-30">
       <h1 className="text-2xl font-bold mb-6">Player Management</h1>
       
-      <PlayerForm onPlayerCreated={handleFetchPlayers} />
+      <PlayerForm onPlayerCreated={handleFetchPlayers} titleForm="Create Players"/>
 
       <Table>
         <TableHeader>
@@ -65,6 +65,7 @@ const [players, setPlayers] = useState<Player[]>([]);
             <TableHead className="w-60 text-left">Name</TableHead>
             <TableHead className="w-60 text-left">Surname</TableHead>
             <TableHead className="text-left">Email</TableHead>
+            {/* TODO : Align label with buttons */}
             <TableHead className="w-34 text-center">Actions</TableHead>
           </TableRow>
         </TableHeader>
