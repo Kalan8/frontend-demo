@@ -13,7 +13,7 @@ const PlayerRegistrationPage = () => {
         <NavigationBtn goTo="management" />
         <ThemeToggle />
       </div>
-      <div className="flex flex-col items-center justify-center min-w-[880px] gap-1 rounded-xl p-1 inset-ring inset-ring-gray-950/5 dark:inset-ring dark:inset-ring-gray-50/5 m-30">
+      <div className="flex flex-col items-center justify-center min-w-[880px] gap-1 rounded-xl p-1 inset-ring inset-ring-gray-950/5 dark:inset-ring dark:inset-ring-gray-50/5 m-20">
         <h1 className="text-2xl font-bold mb-6">Lottery</h1>
 
         <PlayerForm

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Pencil, Trash2 } from "lucide-react";
+import { Mail, Pencil, Play, Trash2 } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -10,7 +10,12 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import PlayerForm from "../components/PlayerForm";
-import { fetchPlayers, PLAYER_API } from "../api/apiPlayer";
+import {
+  fetchPlayers,
+  PLAYER_API,
+  randomPlayer,
+  sendEmailToWinner,
+} from "../api/apiPlayer";
 import type { Player } from "../types/player";
 import ThemeToggle from "@/components/ThemeToggle";
 import NavigationBtn from "@/components/NavigationBtn";
@@ -19,6 +24,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const PlayerListPage = () => {
   const [players, setPlayers] = useState<Player[]>([]);
+  const [winner, setWinner] = useState<Player>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -35,9 +41,32 @@ const PlayerListPage = () => {
     handleFetchPlayers();
   }, []);
 
+  // useEffect(() => {
+  //   handleGetWinner();
+  // }, []);
+
+  const handleGetWinner = () => {
+    randomPlayer()
+      .then((data) => {
+        setWinner(data);
+      })
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
+  };
+
+  const handleSendEmailToWinner = () => {
+    // Check if 'winner' is defined (not null or undefined)
+    if (winner) {
+      sendEmailToWinner(winner.id);
+    } else {
+      // Normally, this piece of code shouldn't be reached: the button is disabled until a winner is defined
+      console.warn("Cannot send email: No winner object available.");
+    }
+  };
+
   const handleEdit = (player: Player) => {
     console.log("Edit player:", player);
-    // TODO: open a modal or something like that
+    // TODO: open a modal
   };
 
   const handleDelete = async (id: number) => {
@@ -67,7 +96,29 @@ const PlayerListPage = () => {
         <NavigationBtn goTo="" />
         <ThemeToggle />
       </div>
-      <div className="flex flex-col items-center justify-center min-w-[880px] gap-1 rounded-xl p-1 inset-ring inset-ring-gray-950/5 dark:inset-ring dark:inset-ring-gray-50/5 m-30">
+      <div className="flex flex-col items-center justify-center min-w-[880px] gap-1 rounded-xl p-1 inset-ring inset-ring-gray-950/5 dark:inset-ring dark:inset-ring-gray-50/5 m-20">
+        <h1 className="text-2xl font-bold mb-6">Lottery Actions</h1>
+        <div className="flex flex-row items-center justify-center">
+          <button title="Get a Winner" onClick={handleGetWinner}>
+            {<Play size="30"> </Play>}
+          </button>
+          <button
+            disabled={winner == null}
+            title="Send email to the Winner"
+            onClick={handleSendEmailToWinner}
+          >
+            {<Mail size="30"> </Mail>}
+          </button>
+        </div>
+        <div className="p-5">
+          {winner && (
+            <p>
+              The winner is {winner.name} {winner.surname} !
+            </p>
+          )}
+        </div>
+      </div>
+      <div className="flex flex-col items-center justify-center min-w-[880px] gap-1 rounded-xl p-1 inset-ring inset-ring-gray-950/5 dark:inset-ring dark:inset-ring-gray-50/5 m-20">
         <h1 className="text-2xl font-bold mb-6">Player Management</h1>
 
         <PlayerForm

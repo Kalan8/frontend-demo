@@ -24,3 +24,16 @@ export const createPlayer = async (player : {name: string; surname:string; email
   return response.json();
 }
 
+export const randomPlayer = async () => {
+  const response = await fetch(API_BASE_URL + PLAYER_API + '/random');
+  if (!response.ok) {
+    throw new Error("Failed to fetch players");
+  }
+  return response.json();
+}
+
+export const sendEmailToWinner = async (id:number) => {
+  // TODO: Csall the API to send a message
+}
+
+
